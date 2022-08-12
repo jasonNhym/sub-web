@@ -1,5 +1,7 @@
-# sub-web
+非原创，源于：[CareyWang/sub-web](https://github.com/CareyWang/sub-web.git)，二次开发项目。
+添加配置源，API服务器，部分功能修改。
 
+# sub-web
 基于 vue-cli 与 [tindy2013/subconverter](https://github.com/tindy2013/subconverter) 后端实现的配置自动生成。
 
 ## Table of Contents
