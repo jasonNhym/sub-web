@@ -1,6 +1,8 @@
 非原创，源于：[CareyWang/sub-web](https://github.com/CareyWang/sub-web.git)，二次开发项目。
 添加配置源，API服务器，部分功能修改。
 
+直接下载[压缩包](https://github.com/nnhym/sub-web/releases/download/tag-1.0/sub-web-v1.0.zip)，解压到nginx的html目录下即可。
+
 # sub-web
 基于 vue-cli 与 [tindy2013/subconverter](https://github.com/tindy2013/subconverter) 后端实现的配置自动生成。
 
