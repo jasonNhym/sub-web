@@ -19,7 +19,7 @@
                 <el-input
                   v-model="form.sourceSubUrl"
                   type="textarea"
-                  rows="3"
+                  rows="5"
                   placeholder="支持订阅或ss/ssr/vmess链接，多个链接每行一个或用 | 分隔"
                   @blur="saveSubUrl"
                 />
@@ -58,8 +58,9 @@
                         v-for="item in group.options"
                         :key="item.value"
                         :label="item.label"
-                        :value="item.value"
-                      ></el-option>
+                        :value="item.value">
+                        <span v-html="item.label"></span>
+                      </el-option>
                     </el-option-group>
                     <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
                   </el-select>
@@ -156,8 +157,9 @@
                   type="danger"
                   @click="makeShortUrl"
                   :loading="loading"
-                  :disabled="customSubUrl.length === 0"
+                  :disabled="true" 
                 >生成短链接</el-button>
+                <!-- customSubUrl.length === 0 -->
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">一键导入Surge</el-button> -->
               </el-form-item>
 
@@ -255,8 +257,107 @@ export default {
           ClashR: "clashr",
           Surge2: "surge&ver=2",
         },
-        backendOptions: [{ value: "http://127.0.0.1:25500/sub?" }],
+        backendOptions: [{value: "http://127.0.0.1:25500/sub?"},{value: "https://subc.toroo.tk/sub?"}],
         remoteConfig: [
+          {
+            label: "ACL4SSR规则",
+            options: [
+                {
+                  label: "默认(去广告-自动测速-微软分流-苹果分流)|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-全球直连-全球拦截-应用净化-AdBlock-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_AdblockPlus.ini"
+                },{
+                  label: "去广告-增强中国IP段-增强国外GFW|中国代理-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_BackCN.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-自动选择-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Mini.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-自动选择-故障转移-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Mini_Fallback.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-自动选择-故障转移-负载均衡-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Mini_MultiMode.ini"
+                },{
+                  label: "去广告|节点选择-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Mini_NoAuto.ini"
+                },{
+                  label: "去广告-自动测速-微软分流|节点选择-自动选择-国外媒体-电报信息-微软服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_NoApple.ini"
+                },{
+                  label: "去广告-微软分流-苹果分流|节点选择-国外媒体-电报信息-微软服务-苹果服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_NoAuto.ini"
+                },{
+                  label: "去广告-微软分流|节点选择-国外媒体-电报信息-微软服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_NoAuto_NoApple.ini"
+                },{
+                  label: "去广告|节点选择-国外媒体-电报信息-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_NoAuto_NoApple_NoMicrosoft.ini"
+                },{
+                  label: "去广告-自动测速-苹果分流|节点选择-自动选择-国外媒体-电报信息-苹果服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_NoMicrosoft.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-谷歌FCM-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-谷歌FCM-全球直连-全球拦截-应用净化-AdBlock-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-手动切换-自动选择-电报信息-油管视频-奈飞视频-巴哈姆特-哔哩哔哩-国外媒体-国内媒体-谷歌FCM-微软云盘-微软服务-苹果服务-游戏平台-网易音乐-全球直连-<br>广告拦截-应用净化-漏网之鱼-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点-🇨🇳 台湾节点-🇸🇬 狮城节点-🇰🇷 韩国节点-奈飞节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-手动切换-自动选择-故障转移-负载均衡-电报信息-油管视频-奈飞视频-巴哈姆特-哔哩哔哩-国外媒体-国内媒体-谷歌FCM-微软云盘-微软服务-苹果服务-游戏平台-<br>网易音乐-全球直连-广告拦截-应用净化-AdBlock-隐私防护-漏网之鱼-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点-🇨🇳 台湾节点-🇸🇬 狮城节点-🇰🇷 韩国节点-奈飞节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-手动切换-自动选择-电报信息-谷歌FCM-谷歌🇨🇳Play下载-谷歌🇨🇳Play服务-谷歌🇨🇳-谷歌-油管视频-奈飞视频-巴哈姆特-哔哩哔哩-国外媒体-国内媒体-微软云盘-微软服务-<br>苹果服务-游戏平台-网易音乐-全球直连-广告拦截-应用净化-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点-🇨🇳 台湾节点-🇸🇬 狮城节点-🇰🇷 韩国节点-奈飞节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Google.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-手动切换-自动选择-故障转移-负载均衡-电报信息-油管视频-奈飞视频-巴哈姆特-哔哩哔哩-国外媒体-国内媒体-微软云盘-微软服务-苹果服务-游戏平台-网易音乐-全球直连-<br>广告拦截-应用净化-漏网之鱼-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点-🇨🇳 台湾节点-🇸🇬 狮城节点-🇰🇷 韩国节点-奈飞节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_MultiMode.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-手动切换-自动选择-故障转移-负载均衡-电报信息-油管视频-奈飞视频-巴哈姆特-哔哩哔哩-国外媒体-国内媒体-谷歌FCM-微软云盘-微软服务-苹果服务-游戏平台-网易音乐-<br>全球直连-广告拦截-应用净化-漏网之鱼-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点-🇨🇳 台湾节点-🇸🇬 狮城节点-🇰🇷 韩国节点-奈飞节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini"
+                },{
+                  label: "去广告-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-手动切换-电报信息-油管视频-奈飞视频-巴哈姆特-哔哩哔哩-国外媒体-国内媒体-谷歌FCM-微软云盘-微软服务-苹果服务-游戏平台-网易音乐-全球直连-广告拦截-应用净化-漏网之鱼-<br>🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点-🇨🇳 台湾节点-🇸🇬 狮城节点-🇰🇷 韩国节点-奈飞节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-自动选择-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-自动选择-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-自动选择-故障转移-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini"
+                },{
+                  label: "去广告-自动测速|节点选择-手动切换-自动选择-全球直连-全球拦截-漏网之鱼-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiCountry.ini"
+                },{
+                  label: "去广告|节点选择-全球直连-全球拦截-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-多国家分组|节点选择-手动切换-自动选择-国外媒体-电报信息-微软服务-苹果服务-谷歌FCM-全球直连-全球拦截-漏网之鱼-🇭🇰 香港节点-🇯🇵 日本节点-🇺🇲 美国节点",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_MultiCountry.ini"
+                },{
+                  label: "去广告-微软分流-苹果分流-多国家分组|节点选择-国外媒体-电报信息-微软服务-苹果服务-谷歌FCM-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-谷歌FCM-全球直连-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_WithChinaIp.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强中国IP段-增强国外GFW|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_WithChinaIp_WithGFW.ini"
+                },{
+                  label: "去广告-自动测速-微软分流-苹果分流-增强国外GFW|节点选择-自动选择-国外媒体-电报信息-微软服务-苹果服务-全球直连-全球拦截-应用净化-漏网之鱼",
+                  value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_WithGFW.ini"
+                }
+            ]
+          },
           {
             label: "universal",
             options: [
@@ -332,7 +433,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: "",
+        customBackend: process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/sub?",
         remoteConfig: "",
         excludeRemarks: "",
         includeRemarks: "",
@@ -653,3 +754,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.el-select-dropdown__item{
+  padding: 10px 20px;
+  height: auto;
+  line-height: 1.4;
+}
+</style>
