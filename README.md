@@ -3,6 +3,8 @@
 
 直接下载[压缩包](https://github.com/nnhym/sub-web/releases/download/tag-1.0/sub-web-v1.0.zip)，解压到nginx的html目录下即可。
 
+直接使用网址：[https://sub.toroo.tk/](https://sub.toroo.tk/)
+
 # sub-web
 基于 vue-cli 与 [tindy2013/subconverter](https://github.com/tindy2013/subconverter) 后端实现的配置自动生成。
 
